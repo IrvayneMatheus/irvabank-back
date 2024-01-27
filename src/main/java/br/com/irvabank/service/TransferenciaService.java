@@ -28,7 +28,6 @@ public class TransferenciaService implements IService<TransferenciaDTO, Transfer
     @Override
     public TransferenciaEntity insert(TransferenciaDTO dto) throws ApiException {
 
-        ClienteEntity clienteDestino = clienteRepository.findByNumeroConta(dto.getContaDestino());
         ClienteEntity clienteOrigem = clienteRepository.findByNumeroConta(dto.getContaOrigem());
 
         TransferenciaEntity entity = new TransferenciaEntity();
