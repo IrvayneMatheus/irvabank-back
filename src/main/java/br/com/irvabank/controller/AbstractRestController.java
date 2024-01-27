@@ -36,8 +36,8 @@ public class AbstractRestController <DTO extends Serializable, Entity extends  S
     }
 
     @Operation(summary = "Disable an element")
-    @DeleteMapping(value = "/delete")
-    public Entity delete(@RequestBody @Valid Integer id) throws ApiException {
+    @DeleteMapping(value = "/delete/{id}")
+    public Entity delete(@PathVariable Integer id) throws ApiException {
         return service.delete(id);
     }
 

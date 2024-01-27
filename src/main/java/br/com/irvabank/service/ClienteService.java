@@ -9,6 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
 
@@ -32,23 +34,47 @@ public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
     }
 
     @Override
-    public ClienteEntity update(ClienteDTO clienteDTO) throws ApiException {
-        return null;
+    public ClienteEntity update(ClienteDTO dto) throws ApiException {
+        ClienteEntity entity = getById(dto.getId());
+
+        ClienteEntity cliente = repository.findByNumeroConta(dto.getNumeroConta());
+
+        if(cliente == null || cliente.getId() == entity.getId()) {
+
+            entity.setNome(dto.getNome());
+            entity.setNumeroConta(dto.getNumeroConta());
+
+            cliente = repository.save(cliente);
+
+            return cliente;
+        } else {
+            throw new ApiException(401, "Já existe outro cliente com esse numero de conta");
+        }
     }
 
     @Override
     public ClienteEntity getById(Integer id) throws ApiException {
-        return null;
+        Optional<ClienteEntity> optional = repository.findById(id);
+
+        if(optional.isPresent()) {
+            return optional.get();
+        }else {
+            throw new ApiException(401, "Cliente nao encontrado");
+        }
     }
 
     @Override
     public ClienteEntity delete(Integer id) throws ApiException {
+        ClienteEntity entity = getById(id);
+        repository.delete(entity);
         return null;
     }
 
     @Override
     public ClienteEntity activate(Integer id) throws ApiException {
-        return null;
+        ClienteEntity entity = getById(id);
+        entity.setActive(false);
+        return repository.save(entity);
     }
 
     @Override
