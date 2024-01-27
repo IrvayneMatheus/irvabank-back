@@ -3,15 +3,32 @@ package br.com.irvabank.service;
 import br.com.irvabank.dto.ClienteDTO;
 import br.com.irvabank.exception.ApiException;
 import br.com.irvabank.model.ClienteEntity;
+import br.com.irvabank.repository.ClienteRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
+
+    @Autowired
+    private ClienteRepository repository;
     @Override
     public ClienteEntity insert(ClienteDTO clienteDTO) throws ApiException {
-        return null;
+        ClienteEntity cliente = repository.findByNumeroConta(clienteDTO.getNumeroConta());
+
+        if (cliente == null) {
+            cliente = new ClienteEntity();
+            cliente.setNome(clienteDTO.getNome());
+            cliente.setNumeroConta(clienteDTO.getNumeroConta());
+            cliente.setActive(true);
+            cliente = repository.save(cliente);
+        } else {
+            throw new ApiException(400, "Cliente já está registrado com esse numero de conta");
+        }
+
+        return cliente;
     }
 
     @Override
@@ -36,6 +53,6 @@ public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
 
     @Override
     public Page<ClienteEntity> findAll(Pageable paging) throws ApiException {
-        return null;
+        return repository.findAll(paging);
     }
 }

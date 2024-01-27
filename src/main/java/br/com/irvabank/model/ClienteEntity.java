@@ -13,7 +13,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "TB_CLIENTE")
-@Data
 public class ClienteEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,4 +39,60 @@ public class ClienteEntity implements Serializable {
 
     @OneToMany(mappedBy="cliente", fetch= FetchType.LAZY)
     private List<TransferenciaEntity> transferencias;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getNumeroConta() {
+        return numeroConta;
+    }
+
+    public void setNumeroConta(String numeroConta) {
+        this.numeroConta = numeroConta;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+    public List<TransferenciaEntity> getTransferencias() {
+        return transferencias;
+    }
+
+    public void setTransferencias(List<TransferenciaEntity> transferencias) {
+        this.transferencias = transferencias;
+    }
 }
