@@ -47,4 +47,9 @@ public class TransferenciaEntity implements Serializable {
 
     @Column(nullable = false)
     private Double taxa;
+
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name="cliente_id")
+    private ClienteEntity cliente;
 }

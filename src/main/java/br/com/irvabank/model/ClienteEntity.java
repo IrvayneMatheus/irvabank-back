@@ -38,6 +38,6 @@ public class ClienteEntity implements Serializable {
     @Column(nullable = false)
     private Boolean active;
 
-    @OneToMany(mappedBy="transferencia", fetch= FetchType.LAZY)
-    private List<TransferenciaEntity> tranferenciaRealizada;
+    @OneToMany(mappedBy="cliente", fetch= FetchType.LAZY)
+    private List<TransferenciaEntity> transferencias;
 }
