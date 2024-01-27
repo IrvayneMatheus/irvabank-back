@@ -3,12 +3,18 @@ package br.com.irvabank.service;
 import br.com.irvabank.dto.TransferenciaDTO;
 import br.com.irvabank.exception.ApiException;
 import br.com.irvabank.model.TransferenciaEntity;
+import br.com.irvabank.repository.TransferenciaRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TransferenciaService implements IService<TransferenciaDTO, TransferenciaEntity> {
+
+    @Autowired
+    private TransferenciaRepository repository;
+
     @Override
     public TransferenciaEntity insert(TransferenciaDTO transferenciaDTO) throws ApiException {
         return null;
@@ -36,6 +42,6 @@ public class TransferenciaService implements IService<TransferenciaDTO, Transfer
 
     @Override
     public Page<TransferenciaEntity> findAll(Pageable paging) throws ApiException {
-        return null;
+        return repository.findAll(paging);
     }
 }
