@@ -20,7 +20,6 @@ import lombok.Data;
 
 @Entity
 @Table(name = "TB_TRANSFERENCIA")
-@Data
 public class TransferenciaEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -52,4 +51,68 @@ public class TransferenciaEntity implements Serializable {
     @ManyToOne
     @JoinColumn(name="cliente_id")
     private ClienteEntity cliente;
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getContaOrigem() {
+        return contaOrigem;
+    }
+
+    public void setContaOrigem(String contaOrigem) {
+        this.contaOrigem = contaOrigem;
+    }
+
+    public String getContaDestino() {
+        return contaDestino;
+    }
+
+    public void setContaDestino(String contaDestino) {
+        this.contaDestino = contaDestino;
+    }
+
+    public Timestamp getDataAgendamento() {
+        return dataAgendamento;
+    }
+
+    public void setDataAgendamento(Timestamp dataAgendamento) {
+        this.dataAgendamento = dataAgendamento;
+    }
+
+    public Timestamp getDataTransferencia() {
+        return dataTransferencia;
+    }
+
+    public void setDataTransferencia(Timestamp dataTransferencia) {
+        this.dataTransferencia = dataTransferencia;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
+    }
+
+    public Double getTaxa() {
+        return taxa;
+    }
+
+    public void setTaxa(Double taxa) {
+        this.taxa = taxa;
+    }
+
+    public ClienteEntity getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(ClienteEntity cliente) {
+        this.cliente = cliente;
+    }
 }
