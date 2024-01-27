@@ -5,12 +5,19 @@ Bem-vindo ao IrvaBack! Este é um projeto Java com Spring Boot que oferece funci
 O projeto utiliza as seguintes dependências:
 
 Spring Boot Starter Data JPA: Suporte ao acesso a dados usando o Hibernate.
+
 H2 Database: Um banco de dados em memória para desenvolvimento e testes.
+
 Spring Boot Starter Validation: Suporte à validação de dados.
+
 Spring Boot Starter Web: Starter para criar aplicativos da web com Spring MVC.
+
 Lombok: Biblioteca para reduzir o código boilerplate em classes Java.
+
 Spring Boot Starter Test: Starter para testes em projetos Spring Boot.
+
 Springdoc OpenAPI: Geração automática de documentação Swagger para APIs Spring Boot.
+
 Acesso ao Banco de Dados
 Após executar a aplicação, você pode acessar o console H2 Database em http://localhost:8080/h2-console/. As configurações do banco podem ser encontradas no arquivo application.properties e podem ser editadas por meio das variáveis de ambiente. Exemplo:
 
