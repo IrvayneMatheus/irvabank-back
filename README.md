@@ -1,6 +1,40 @@
 # IrvaBank 
 Welcome to IrvaBank! This is a SpringBoot project that provides functionalities for controlling transfer operations. Below are important details about the configuration and usage of the project.
 
+## Description
+
+In the IrvaBank project, strategic decisions have been made to organize and structure the code in a cohesive and efficient manner. Here are enhancements to the description of these decisions:
+
+### Controller Layer:
+Controllers play a vital role in receiving and directing HTTP requests, serving as the primary interface between the client and the application's operations.
+
+### Centralized Abstract Class:
+Introducing a centralized abstract class consolidates shared functionalities among controllers. This approach promotes intelligent code reuse and simplifies future extensions or changes.
+
+### Pre-implemented Services:
+The use of a centralized abstract class provides controllers with the ability to extend pre-implemented functionalities, ensuring consistency in services and reducing code complexity in each controller.
+
+### Service Layer:
+The service layer defines an interface that serves as a contract for business operations. This abstraction not only guides the implementation of services but also facilitates unit testing and the substitution of implementations when necessary.
+
+### Validation Layer:
+The introduction of a dedicated validation layer ensures that each business flow undergoes specific checks. This not only strengthens data integrity but also establishes a central point for customizable validation logic.
+
+### Strategy Design Pattern for Fee Calculation:
+Isolating fee calculation logic in a strategy package makes the project more flexible and adaptable to different algorithmic approaches without affecting the overall structure.
+
+### Repository Layer:
+The repository layer manages data persistence, providing an effective abstraction for the service layer. This contributes to efficient decoupling and simplifies the evolution of data access.
+
+### DTO and Entities Layer:
+The separation of packages for DTOs (Data Transfer Objects) and entities simplifies communication between different layers of the application. DTOs efficiently represent transmitted data, while entities reflect persistent objects in the database.
+
+### Mapper Layer:
+The introduction of a mapper package offers an elegant solution for consistent conversion of values between DTOs and entities. This reduces code complexity, enhances maintainability, and avoids unnecessary duplications.
+
+These architectural decisions reflect the pursuit of a modular, easily maintainable, and scalable structure, adhering to best practices and fundamental principles of development with the Spring Boot framework.
+
+
 ## Dependencies
 The project IrvaBank utilizes a set of dependencies and technologies, each serving a specific purpose. Here's a description of each:
 
