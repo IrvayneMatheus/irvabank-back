@@ -37,7 +37,7 @@ public class TransferenciaService implements IService<TransferenciaDTO, Transfer
         entity.setValor(dto.getValor());
         entity.setCliente(clienteOrigem);
         entity.setDataAgendamento(Timestamp.from(Instant.now()));
-        entity.setTaxa(TaxaUtil.calcularValorTaxa(entity.getValor(), entity.getDataTransferencia(), entity.getDataAgendamento()));
+        entity.setTaxa(TaxaUtil.calcularValorTaxa(entity.getValor(),  entity.getDataAgendamento(), entity.getDataTransferencia()));
         entity = repository.save(entity);
         return entity;
     }
