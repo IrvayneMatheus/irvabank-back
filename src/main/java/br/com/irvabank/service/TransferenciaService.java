@@ -42,13 +42,13 @@ public class TransferenciaService implements IService<TransferenciaDTO, Transfer
         entity.setCliente(clienteOrigem);
         entity.setTaxa(TaxaUtil.calcularValorTaxa(entity.getValor(),  entity.getDataAgendamento(), entity.getDataTransferencia()));
 
-        validaErros(entity);
+        validarErrosCadastro(entity);
 
         entity = transferenciaRepository.save(entity);
         return entity;
     }
 
-    private void validaErros(TransferenciaEntity entity) {
+    private void validarErrosCadastro(TransferenciaEntity entity) {
         Errors errors = new BeanPropertyBindingResult(entity, TransferenciaEntity.class.getName());
         transferenciaCadastroValidation.validate(entity, errors);
 

@@ -1,7 +1,6 @@
 package br.com.irvabank.validation;
 
 
-import br.com.irvabank.dto.TransferenciaDTO;
 import br.com.irvabank.model.ClienteEntity;
 import br.com.irvabank.model.TransferenciaEntity;
 import br.com.irvabank.repository.ClienteRepository;
@@ -30,7 +29,7 @@ public class TransferenciaCadastroValidation implements Validator {
         ClienteEntity origem = clienteRepository.findByNumeroConta(entity.getContaOrigem());
         ClienteEntity destino = clienteRepository.findByNumeroConta(entity.getContaDestino());
 
-        if (Objects.equals(entity.getContaOrigem(), entity.getContaDestino())) errors.reject("Transferência Inválida", "Não é possível realizar transferencia para a propría conta.");
+        if (Objects.equals(entity.getContaOrigem(), entity.getContaDestino())) errors.reject("Transferência Inválida", "Não é possível realizar transferencia para a própria conta.");
         if (Objects.isNull(origem)) errors.reject("Conta Inválida", "Número da conta que será debitado não está cadastrada.");
         if (Objects.isNull(destino)) errors.reject("Conta Inválida", "Número da conta que será transferido não está cadastrada.");
         if (entity.getValor() <= 0)  errors.reject("Valor Inválido", "Valor a ser transferido não pode ser menor ou igual a zero.");

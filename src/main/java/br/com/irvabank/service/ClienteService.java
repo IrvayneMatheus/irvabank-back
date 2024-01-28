@@ -2,53 +2,81 @@ package br.com.irvabank.service;
 
 import br.com.irvabank.dto.ClienteDTO;
 import br.com.irvabank.exception.ApiException;
+import br.com.irvabank.mapper.ClienteMapper;
 import br.com.irvabank.model.ClienteEntity;
+import br.com.irvabank.model.TransferenciaEntity;
 import br.com.irvabank.repository.ClienteRepository;
+import br.com.irvabank.validation.ClienteCadastroValidation;
+import br.com.irvabank.validation.ClienteEdicaoValidation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BeanPropertyBindingResult;
+import org.springframework.validation.Errors;
+import org.springframework.validation.ObjectError;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
 
     @Autowired
     private ClienteRepository repository;
+
+    @Autowired
+    private ClienteCadastroValidation clienteCadastroValidation;
+
+    @Autowired
+    private ClienteEdicaoValidation clienteEdicaoValidation;
+
     @Override
     public ClienteEntity insert(ClienteDTO clienteDTO) throws ApiException {
-        ClienteEntity cliente = repository.findByNumeroConta(clienteDTO.getNumeroConta());
+        ClienteEntity cliente = ClienteMapper.dtoToEntity(clienteDTO);
 
-        if (cliente == null) {
-            cliente = new ClienteEntity();
-            cliente.setNome(clienteDTO.getNome());
-            cliente.setNumeroConta(clienteDTO.getNumeroConta());
-            cliente.setActive(true);
-            cliente = repository.save(cliente);
-        } else {
-            throw new ApiException(400, "Cliente já está registrado com esse numero de conta");
+        validarErrosCadastro(cliente);
+
+        return repository.save(cliente);
+    }
+
+    private void validarErrosCadastro(ClienteEntity cliente) {
+        Errors errors = new BeanPropertyBindingResult(cliente, ClienteEntity.class.getName());
+
+        clienteCadastroValidation.validate(cliente, errors);
+
+        if (errors.hasErrors()) {
+            List<String> errorMessages = errors.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+
+            throw new ApiException(401, String.join(" ", errorMessages));
         }
-
-        return cliente;
     }
 
     @Override
     public ClienteEntity update(ClienteDTO dto) throws ApiException {
-        ClienteEntity entity = getById(dto.getId());
 
-        ClienteEntity cliente = repository.findByNumeroConta(dto.getNumeroConta());
+        validarErrosEdicao(dto);
 
-        if(cliente == null || cliente.getId() == entity.getId()) {
+        ClienteEntity cliente = ClienteMapper.dtoToEntity(dto);
+        cliente.setId(dto.getId());
 
-            entity.setNome(dto.getNome());
-            entity.setNumeroConta(dto.getNumeroConta());
+        return repository.save(cliente);
+    }
 
-            cliente = repository.save(entity);
+    private void validarErrosEdicao(ClienteDTO dto) {
+        Errors errors = new BeanPropertyBindingResult(dto, ClienteDTO.class.getName());
 
-            return cliente;
-        } else {
-            throw new ApiException(401, "Já existe outro cliente com esse numero de conta");
+        clienteEdicaoValidation.validate(dto, errors);
+
+        if (errors.hasErrors()) {
+            List<String> errorMessages = errors.getAllErrors().stream()
+                    .map(ObjectError::getDefaultMessage)
+                    .collect(Collectors.toList());
+
+            throw new ApiException(401, String.join(" ", errorMessages));
         }
     }
 
