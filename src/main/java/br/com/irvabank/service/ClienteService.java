@@ -44,7 +44,7 @@ public class ClienteService implements IService<ClienteDTO, ClienteEntity> {
             entity.setNome(dto.getNome());
             entity.setNumeroConta(dto.getNumeroConta());
 
-            cliente = repository.save(cliente);
+            cliente = repository.save(entity);
 
             return cliente;
         } else {
