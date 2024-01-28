@@ -1,25 +1,35 @@
-# IrvaBack - Aplicação Java com Spring Boot
-Bem-vindo ao IrvaBack! Este é um projeto Java com Spring Boot que oferece funcionalidades baseadas em API. Abaixo estão informações importantes sobre a configuração e utilização do projeto.
+# IrvaBank 
+Welcome to IrvaBank! This is a SpringBoot project that provides functionalities for controlling transfer operations. Below are important details about the configuration and usage of the project.
 
-## Dependências
-O projeto utiliza as seguintes dependências:
+## Dependencies
+The project IrvaBank utilizes a set of dependencies and technologies, each serving a specific purpose. Here's a description of each:
 
-Spring Boot Starter Data JPA: Suporte ao acesso a dados usando o Hibernate.
+1) Spring Boot Starter Data JPA (Version: 3.2.2): Provides support for data access using Hibernate.
+2) H2 Database (Version: Not specified): In-memory database for development and testing.
+3) Spring Boot Starter Validation (Version: 3.2.2): Supports data validation.
+4) Spring Boot Starter Web (Version: 3.2.2): Starter for creating web applications with Spring MVC.
+5) Lombok (Version: Not specified): Reduces boilerplate code in Java classes, enhancing code conciseness.
+6) Spring Boot Starter Test (Version: 3.2.2): Starter for testing in Spring Boot projects.
+7) Springdoc OpenAPI (Version: 2.0.3): Enables automatic generation of Swagger documentation for Spring Boot APIs. The specific version 2.0.3 is used for this project.
 
-H2 Database: Um banco de dados em memória para desenvolvimento e testes.
+The project is based on the Spring Boot framework, providing a robust and efficient foundation for building Java applications. Additionally, the project utilizes Maven for dependency management, and the Java version specified is 21.
 
-Spring Boot Starter Validation: Suporte à validação de dados.
+Overall, these dependencies and technologies contribute to the development of a secure, well-tested, and documented Spring Boot application for the IrvaBank project.
 
-Spring Boot Starter Web: Starter para criar aplicativos da web com Spring MVC.
+## Project Execution
+To run the project, use your favorite IDE or execute the following command in the command line:
 
-Lombok: Biblioteca para reduzir o código boilerplate em classes Java.
+bash
+```sh
+./mvnw spring-boot:run
+```
+After initialization, the application will be available at http://localhost:8080/.
 
-Spring Boot Starter Test: Starter para testes em projetos Spring Boot.
+Note: Make sure to adjust the settings as needed, especially in a production environment. Refer to the official Spring Boot documentation for more details on deployment and advanced configuration.
 
-Springdoc OpenAPI: Geração automática de documentação Swagger para APIs Spring Boot.
+## Database Access
 
-Acesso ao Banco de Dados
-Após executar a aplicação, você pode acessar o console H2 Database em http://localhost:8080/h2-console/. As configurações do banco podem ser encontradas no arquivo application.properties e podem ser editadas por meio das variáveis de ambiente. Exemplo:
+After running the application, you can access the H2 Database console at http://localhost:8080/h2-console/. The database configurations can be found in the application.properties file and can be edited through environment variables. Example:
 
 properties
 ```sh
@@ -30,16 +40,9 @@ spring.datasource.password=password
 spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
 spring.h2.console.enabled=true
 ```
-Documentação Swagger (Springdoc OpenAPI)
-A documentação Swagger está disponível em http://localhost:8080/swagger-ui/index.html após a execução da aplicação.
 
-Execução do Projeto
-Para executar o projeto, utilize sua IDE favorita ou execute o seguinte comando na linha de comando:
+## Swagger Documentation (Springdoc OpenAPI)
+The Swagger documentation is available at http://localhost:8080/swagger-ui/index.html after running the application.
 
-bash
-```sh
-./mvnw spring-boot:run
-```
-Após a inicialização, a aplicação estará disponível em http://localhost:8080/.
+![image](https://drive.google.com/uc?export=view&id=1BZ4YgqbR2ikdauoRgtTWQrq7FGsXW17k)
 
-Nota: Certifique-se de ajustar as configurações conforme necessário, especialmente em um ambiente de produção. Consulte a documentação oficial do Spring Boot para mais detalhes sobre implantação e configuração avançada.
